@@ -15,6 +15,7 @@ public class PageController {
 		mv.addObject("greeting", "Welcome to Spring Web MVC"); 
 		return mv;
 	}
+	
 	/*
 	@RequestMapping(value="/test")
 	public ModelAndView test(@RequestParam(value="greeting", required=false) String greetigs){
