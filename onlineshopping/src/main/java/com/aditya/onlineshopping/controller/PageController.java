@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-
 @Controller
 public class PageController {
 	
@@ -15,7 +14,7 @@ public class PageController {
 		mv.addObject("greeting", "Welcome to Spring Web MVC"); 
 		return mv;
 	}
-	
+
 	/*
 	@RequestMapping(value="/test")
 	public ModelAndView test(@RequestParam(value="greeting", required=false) String greetigs){
@@ -29,7 +28,6 @@ public class PageController {
 	}
 	*/
 	
-	
 	@RequestMapping(value="/test/{greeting}")
 	public ModelAndView test(@PathVariable("greeting") String greetigs){
 		if (greetigs==null) {
@@ -40,5 +38,7 @@ public class PageController {
 		return mv;
 		
 	}
+	
+	
 
 }
