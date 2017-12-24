@@ -1,0 +1,38 @@
+/*!
+ * Start Bootstrap - Shop Homepage (https://startbootstrap.com/template-overviews/shop-homepage)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
+ */
+html{
+	height: 100%;
+}
+
+body {
+  padding-top: 54px;
+  height: 100%;
+}
+
+ @media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+} 
+
+
+/*
+	Custom styling
+	wrapper class is body one which min height is 100% of body
+*/
+.wrapper {
+	min-height: 100%;
+	position: relative;
+}
+
+.content{
+		padding-bottom: 100px;   /*Height of the footer*/
+}
+.footer{
+	position:  absolute;
+	bottom:  15px;
+	height:  60px; 
+}
