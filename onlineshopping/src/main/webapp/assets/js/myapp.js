@@ -7,9 +7,13 @@ $(function(){
 		case 'Contact Us':
 			$('#contact').addClass('active');		//id in navbar as a selector
 			break;
+		case 'All Products':
+			$('#listProducts').addClass('active');		//id in navbar as a selector
+			break;
 		
-		default:
-			$('#home').addClass('active');	
+		default: 
+			$('#listProducts').addClass('active');
+			$('#a_'+menu).addClass('active');
 			break;
 	}
 	
