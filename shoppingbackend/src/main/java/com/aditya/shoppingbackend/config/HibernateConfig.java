@@ -33,74 +33,72 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * */
 
 @Configuration
-@ComponentScan(basePackages= {"com.aditya.shoppingbackend.dto"})
+@ComponentScan(basePackages = { "com.aditya.shoppingbackend.dto" })
 @EnableTransactionManagement
-@PropertySource(value= {"classpath:db.properties"})
+@PropertySource(value = { "classpath:db.properties" })
 public class HibernateConfig {
-	
-	@Autowired 
+
+	@Autowired
 	private Environment env;
-	
+
 	@Bean
 	public DataSource getDataSource() {
-		DriverManagerDataSource dataSource= new DriverManagerDataSource();
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(env.getRequiredProperty("mysql.driver"));
 		dataSource.setUrl(env.getRequiredProperty("mysql.url"));
 		dataSource.setUsername(env.getRequiredProperty("mysql.user"));
 		dataSource.setPassword(env.getRequiredProperty("mysql.password"));
-		
+
 		return dataSource;
 	}
-	
+
 	@Bean
 	public LocalSessionFactoryBean getSessionFactory(DataSource dataSource) {
-		
-		/*LocalSessionFactoryBuilder builder= new LocalSessionFactoryBuilder(dataSource);
-		
-		builder.addProperties(getHibernateProperties());
-		builder.scanPackages("com.aditya.spring.hibernate.dto");*/
-		LocalSessionFactoryBean factoryBean= new LocalSessionFactoryBean();
+
+		/*
+		 * LocalSessionFactoryBuilder builder= new
+		 * LocalSessionFactoryBuilder(dataSource);
+		 * 
+		 * builder.addProperties(getHibernateProperties());
+		 * builder.scanPackages("com.aditya.spring.hibernate.dto");
+		 */
+		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 		factoryBean.setDataSource(dataSource);
-		factoryBean.setPackagesToScan(new String[] {"com.aditya.shoppingbackend.dto"});
+		factoryBean.setPackagesToScan(new String[] { "com.aditya.shoppingbackend.dto" });
 		factoryBean.setHibernateProperties(getHibernateProperties());
-		
-		
-		
-		
-		
+
 		return factoryBean;
 	}
-	
-	
+
 	@Bean
 	public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
-		
-		//HibernateTransactionManager transactionManager= new HibernateTransactionManager(getSessionFactory());
-		HibernateTransactionManager transactionManager= new HibernateTransactionManager();
+
+		// HibernateTransactionManager transactionManager= new
+		// HibernateTransactionManager(getSessionFactory());
+		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
 		transactionManager.setSessionFactory(sessionFactory);
-		
+
 		return transactionManager;
 	}
-	
-	
-	//All the hibernate propeties will be required in this method
+
+	// All the hibernate propeties will be required in this method
 	private Properties getHibernateProperties() {
 		Properties properties = new Properties();
-        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-        properties.put("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
-        properties.put("hibernate.format_sql", env.getRequiredProperty("hibernate.format_sql"));
-        properties.put("hibernate.hbm2ddl.auto", env.getRequiredProperty("hibernate.hbm2ddl.auto"));
-        /*properties.put("C3P0_MIN_SIZE", env.getProperty("hibernate.c3p0.min_size"));
-        properties.put(C3P0_MAX_SIZE, env.getProperty("hibernate.c3p0.max_size"));
-        properties.put(C3P0_ACQUIRE_INCREMENT, 
-              env.getProperty("hibernate.c3p0.acquire_increment"));
-        properties.put(C3P0_TIMEOUT, env.getProperty("hibernate.c3p0.timeout"));
-        properties.put(C3P0_MAX_STATEMENTS, env.getProperty("hibernate.c3p0.max_statements"));*/
-        
-		 
-		
+		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+		properties.put("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
+		properties.put("hibernate.format_sql", env.getRequiredProperty("hibernate.format_sql"));
+		properties.put("hibernate.hbm2ddl.auto", env.getRequiredProperty("hibernate.hbm2ddl.auto"));
+		/*
+		 * properties.put("C3P0_MIN_SIZE", env.getProperty("hibernate.c3p0.min_size"));
+		 * properties.put(C3P0_MAX_SIZE, env.getProperty("hibernate.c3p0.max_size"));
+		 * properties.put(C3P0_ACQUIRE_INCREMENT,
+		 * env.getProperty("hibernate.c3p0.acquire_increment"));
+		 * properties.put(C3P0_TIMEOUT, env.getProperty("hibernate.c3p0.timeout"));
+		 * properties.put(C3P0_MAX_STATEMENTS,
+		 * env.getProperty("hibernate.c3p0.max_statements"));
+		 */
+
 		return properties;
 	}
-	
 
 }
